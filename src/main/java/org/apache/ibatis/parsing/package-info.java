@@ -15,5 +15,7 @@
  */
 /**
  * Parsing utils
+ * 解析器模块： 主要是对 XPath的再次封装，为了初始化的时候解析配置文件和映射配置文件 提供支持
+ * 为处理动态Sql语句中的占位符提供支持
  */
 package org.apache.ibatis.parsing;

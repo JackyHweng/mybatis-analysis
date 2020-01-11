@@ -25,8 +25,10 @@ import java.lang.reflect.Type;
  * @since 3.1.0
  * @author Simone Tripodi
  */
+// 引用泛型抽象类
 public abstract class TypeReference<T> {
 
+  // 这就是泛型
   private final Type rawType;
 
   protected TypeReference() {
@@ -34,6 +36,7 @@ public abstract class TypeReference<T> {
   }
 
   Type getSuperclassTypeParameter(Class<?> clazz) {
+    // 获取父类的 <T> 也就是这个类型转换器的父类的泛型
     Type genericSuperclass = clazz.getGenericSuperclass();
     if (genericSuperclass instanceof Class) {
       // try to climb up the hierarchy until meet something useful
@@ -45,6 +48,7 @@ public abstract class TypeReference<T> {
         + "Remove the extension or add a type parameter to it.");
     }
 
+    // 获取 当前的泛型 <T>
     Type rawType = ((ParameterizedType) genericSuperclass).getActualTypeArguments()[0];
     // TODO remove this when Reflector is fixed to return Types
     if (rawType instanceof ParameterizedType) {

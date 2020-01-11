@@ -34,6 +34,7 @@ import java.lang.annotation.Target;
  * </pre>
  * @author Eduardo Macarron
  */
+// 匹配的JDBC type 类型的注解
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
@@ -42,7 +43,9 @@ public @interface MappedJdbcTypes {
    * Returns jdbc types to map {@link TypeHandler}.
    *
    * @return jdbc types
+   *
    */
+  // 匹配到 JDBCTYpe 的数组
   JdbcType[] value();
 
   /**

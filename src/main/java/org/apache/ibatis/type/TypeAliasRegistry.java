@@ -35,6 +35,8 @@ import org.apache.ibatis.io.Resources;
 /**
  * @author Clinton Begin
  */
+// 类型与别名的注册表
+// 通过别名，我们在 Mapper XML 中的 resultType 和 parameterType 属性，直接使用，而不用写全类名
 public class TypeAliasRegistry {
 
   private final Map<String, Class<?>> typeAliases = new HashMap<>();
@@ -121,41 +123,54 @@ public class TypeAliasRegistry {
     }
   }
 
+  // 扫描指定报下的所有类，并进行注册，这个和注册 TypeHandler 的思路是一样的
   public void registerAliases(String packageName) {
     registerAliases(packageName, Object.class);
   }
 
   public void registerAliases(String packageName, Class<?> superType) {
+    // 扫包 获取指定包下的所有类
     ResolverUtil<Class<?>> resolverUtil = new ResolverUtil<>();
     resolverUtil.find(new ResolverUtil.IsA(superType), packageName);
     Set<Class<? extends Class<?>>> typeSet = resolverUtil.getClasses();
+    // 开始遍历所有类
     for (Class<?> type : typeSet) {
       // Ignore inner classes and interfaces (including package-info.java)
       // Skip also inner classes. See issue #6
+      /// 类名不为""(排除匿名类) && 类不为接口 && 排除内部类
       if (!type.isAnonymousClass() && !type.isInterface() && !type.isMemberClass()) {
+        // 注册 默认注册的key 为 类的简单类名
         registerAlias(type);
       }
     }
   }
 
   public void registerAlias(Class<?> type) {
+    // 获取简单类名
     String alias = type.getSimpleName();
+    // 获取Alias 注解
     Alias aliasAnnotation = type.getAnnotation(Alias.class);
     if (aliasAnnotation != null) {
+      // 如果有注解 就使用注解上的名称
       alias = aliasAnnotation.value();
     }
+    // 注册别名
     registerAlias(alias, type);
   }
 
+  // 注册类型与别名的注册表
   public void registerAlias(String alias, Class<?> value) {
     if (alias == null) {
       throw new TypeException("The parameter alias cannot be null");
     }
     // issue #748
+    // 转小写
     String key = alias.toLowerCase(Locale.ENGLISH);
+    // 判断别名是不是有冲突，如果有冲突就抛出异常
     if (typeAliases.containsKey(key) && typeAliases.get(key) != null && !typeAliases.get(key).equals(value)) {
       throw new TypeException("The alias '" + alias + "' is already mapped to the value '" + typeAliases.get(key).getName() + "'.");
     }
+    // 注册到 typeAlias 集合 Key 是 别名 ， value： Class<?>
     typeAliases.put(key, value);
   }
 

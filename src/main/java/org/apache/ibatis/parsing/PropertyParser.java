@@ -47,6 +47,7 @@ public class PropertyParser {
   private static final String ENABLE_DEFAULT_VALUE = "false";
   private static final String DEFAULT_VALUE_SEPARATOR = ":";
 
+  // 禁止构造
   private PropertyParser() {
     // Prevent Instantiation
   }

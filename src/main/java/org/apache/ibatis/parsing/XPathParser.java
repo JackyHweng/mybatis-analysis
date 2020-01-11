@@ -47,7 +47,7 @@ import org.xml.sax.SAXParseException;
 // 用于解析xml 文件的
 public class XPathParser {
 
-  // xml document 对象
+  // xml 被解析后生成的 org.w3c.dom.document 对象
   private final Document document;
   // 是否验证
   private boolean validation;
@@ -302,4 +302,14 @@ public class XPathParser {
     this.xpath = factory.newXPath();
   }
 
+  @Override
+  public String toString() {
+    return "XPathParser{" +
+      "document=" + document +
+      ", validation=" + validation +
+      ", entityResolver=" + entityResolver +
+      ", variables=" + variables +
+      ", xpath=" + xpath +
+      '}';
+  }
 }

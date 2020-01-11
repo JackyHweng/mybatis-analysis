@@ -34,6 +34,7 @@ import java.lang.annotation.Target;
  * </pre>
  * @author Eduardo Macarron
  */
+// 匹配到Java Type 的注解
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
@@ -43,5 +44,6 @@ public @interface MappedTypes {
    *
    * @return java types
    */
+  // 匹配到 Java Type 类型的数组
   Class<?>[] value();
 }

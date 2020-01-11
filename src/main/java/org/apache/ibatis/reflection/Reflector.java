@@ -50,7 +50,7 @@ import org.apache.ibatis.reflection.property.PropertyNamer;
 // 反射器 每个反射对应一个类，缓存类的元信息
 public class Reflector {
 
-  // 类
+  // 对应的类
   private final Class<?> type;
   // 可以读属性数组
   private final String[] readablePropertyNames;

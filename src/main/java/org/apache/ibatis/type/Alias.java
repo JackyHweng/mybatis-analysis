@@ -34,6 +34,7 @@ import java.lang.annotation.Target;
  * </pre>
  * @author Clinton Begin
  */
+// 别名的注解
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)

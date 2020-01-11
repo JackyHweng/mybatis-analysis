@@ -15,5 +15,6 @@
  */
 /**
  * Reflection utils.
+ * 反射模块，对Java的原生反射进行了再次的封装，并进一步优化，如缓存了类的元信息，提高了反射操作
  */
 package org.apache.ibatis.reflection;

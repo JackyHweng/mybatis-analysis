@@ -30,7 +30,7 @@ import org.xml.sax.SAXException;
  * @author Clinton Begin
  * @author Eduardo Macarron
  */
-// 用于加载 `mybatis-3-config.dtd ` 和 `mybatis-3-mapper.dtd`的文件
+// 用于加载 `mybatis-3-config.dtd ` 和 `mybatis-3-mapper.dtd` 这2个文件
 public class XMLMapperEntityResolver implements EntityResolver {
 
   private static final String IBATIS_CONFIG_SYSTEM = "ibatis-3-config.dtd";

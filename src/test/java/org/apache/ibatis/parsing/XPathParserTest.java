@@ -180,6 +180,7 @@ class XPathParserTest {
   }
 
   private void testEvalMethod(XPathParser parser) {
+    System.out.println(parser);
     assertEquals((Long) 1970L, parser.evalLong("/employee/birth_date/year"));
     assertEquals((short) 6, (short) parser.evalShort("/employee/birth_date/month"));
     assertEquals((Integer) 15, parser.evalInteger("/employee/birth_date/day"));
@@ -200,38 +201,38 @@ class XPathParserTest {
     String usersNodeToString = parser.evalNode("/users").toString();
     String userNodeToString = parser.evalNode("/users/user").toString();
     String carsNodeToString = parser.evalNode("/users/user/cars").toString();
-    
-    String usersNodeToStringExpect = 
-      "<users>\n" + 
-      "    <user>\n" + 
-      "        <id>100</id>\n" + 
-      "        <name>Tom</name>\n" + 
-      "        <age>30</age>\n" + 
-      "        <cars>\n" + 
-      "            <car>BMW</car>\n" + 
-      "            <car>Audi</car>\n" + 
-      "            <car>Benz</car>\n" + 
-      "        </cars>\n" + 
-      "    </user>\n" + 
+
+    String usersNodeToStringExpect =
+      "<users>\n" +
+      "    <user>\n" +
+      "        <id>100</id>\n" +
+      "        <name>Tom</name>\n" +
+      "        <age>30</age>\n" +
+      "        <cars>\n" +
+      "            <car>BMW</car>\n" +
+      "            <car>Audi</car>\n" +
+      "            <car>Benz</car>\n" +
+      "        </cars>\n" +
+      "    </user>\n" +
       "</users>\n";
 
-    String userNodeToStringExpect = 
-      "<user>\n" + 
-      "    <id>100</id>\n" + 
-      "    <name>Tom</name>\n" + 
-      "    <age>30</age>\n" + 
-      "    <cars>\n" + 
-      "        <car>BMW</car>\n" + 
-      "        <car>Audi</car>\n" + 
-      "        <car>Benz</car>\n" + 
-      "    </cars>\n" + 
+    String userNodeToStringExpect =
+      "<user>\n" +
+      "    <id>100</id>\n" +
+      "    <name>Tom</name>\n" +
+      "    <age>30</age>\n" +
+      "    <cars>\n" +
+      "        <car>BMW</car>\n" +
+      "        <car>Audi</car>\n" +
+      "        <car>Benz</car>\n" +
+      "    </cars>\n" +
       "</user>\n";
-  
-  String carsNodeToStringExpect = 
-      "<cars>\n" + 
-      "    <car>BMW</car>\n" + 
-      "    <car>Audi</car>\n" + 
-      "    <car>Benz</car>\n" + 
+
+  String carsNodeToStringExpect =
+      "<cars>\n" +
+      "    <car>BMW</car>\n" +
+      "    <car>Audi</car>\n" +
+      "    <car>Benz</car>\n" +
       "</cars>\n";
 
     assertEquals(usersNodeToStringExpect, usersNodeToString);
