@@ -56,6 +56,7 @@ import org.apache.ibatis.logging.LogFactory;
  *
  * @author Tim Fennell
  */
+// 解析器工具类 用于获取指定目录符合条件的类
 public class ResolverUtil<T> {
   /*
    * An instance of Log to use for logging in this class.
@@ -66,6 +67,7 @@ public class ResolverUtil<T> {
    * A simple interface that specifies how to test classes to determine if they
    * are to be included in the results produced by the ResolverUtil.
    */
+  // 匹配判断接口
   public interface Test {
     /**
      * Will be called repeatedly with candidate classes. Must return True if a class
@@ -78,6 +80,7 @@ public class ResolverUtil<T> {
    * A Test that checks to see if each class is assignable to the provided class. Note
    * that this test will match the parent type itself if it is presented for matching.
    */
+  // 实现Test 接口 判断是否为指定类
   public static class IsA implements Test {
     private Class<?> parent;
 
@@ -102,6 +105,7 @@ public class ResolverUtil<T> {
    * A Test that checks to see if each class is annotated with a specific annotation. If it
    * is, then the test returns true, otherwise false.
    */
+  // 判断是否有指定注解
   public static class AnnotatedWith implements Test {
     private Class<? extends Annotation> annotation;
 
@@ -170,6 +174,7 @@ public class ResolverUtil<T> {
    * @param parent the class of interface to find subclasses or implementations of
    * @param packageNames one or more package names to scan (including subpackages) for classes
    */
+  // 判断指定目录下们，符合指定类的类们
   public ResolverUtil<T> findImplementations(Class<?> parent, String... packageNames) {
     if (packageNames == null) {
       return this;
@@ -190,6 +195,7 @@ public class ResolverUtil<T> {
    * @param annotation the annotation that should be present on matching classes
    * @param packageNames one or more package names to scan (including subpackages) for classes
    */
+  // 判断指定目录下们，符合指定注解的类们
   public ResolverUtil<T> findAnnotated(Class<? extends Annotation> annotation, String... packageNames) {
     if (packageNames == null) {
       return this;
@@ -213,13 +219,18 @@ public class ResolverUtil<T> {
    * @param packageName the name of the package from which to start scanning for
    *        classes, e.g. {@code net.sourceforge.stripes}
    */
+  // 获取指定报下，符合条件的类
   public ResolverUtil<T> find(Test test, String packageName) {
+    // 获取包的路径
     String path = getPackagePath(packageName);
 
     try {
+      // 后去路径下所有文件
       List<String> children = VFS.getInstance().list(path);
       for (String child : children) {
         if (child.endsWith(".class")) {
+          // 遍历文件，判断是否为 class 结尾
+          // 如果匹配就加入
           addIfMatching(test, child);
         }
       }
@@ -250,14 +261,18 @@ public class ResolverUtil<T> {
   @SuppressWarnings("unchecked")
   protected void addIfMatching(Test test, String fqn) {
     try {
+      // 替换系统的文件路径符号 编程全限定类名 com/hello/world.class -> com.hello.world.class
       String externalName = fqn.substring(0, fqn.indexOf('.')).replace('/', '.');
+      // 获取ClassLoader
       ClassLoader loader = getClassLoader();
       if (log.isDebugEnabled()) {
         log.debug("Checking to see if class " + externalName + " matches criteria [" + test + "]");
       }
 
+      //加载类
       Class<?> type = loader.loadClass(externalName);
       if (test.matches(type)) {
+        // 判断是否符合，符合就加入到集合
         matches.add((Class<T>) type);
       }
     } catch (Throwable t) {

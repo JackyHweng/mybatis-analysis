@@ -30,7 +30,7 @@ import java.util.Properties;
  *
  * @author Clinton Begin
  */
-// Resource 的操作类
+// Resource 的操作类 其实就是对 ClassLoaderWrapper 的再次封装
 public class Resources {
 
   // ClassLoaderWrapper
