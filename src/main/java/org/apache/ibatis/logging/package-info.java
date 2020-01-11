@@ -15,5 +15,6 @@
  */
 /**
  * Base package for logging.
+ * MyBatis 作为一个设计优良的框架，除了提供详细的日志输出信息，还要能够集成多种日志框架，其日志模块的一个主要功能就是集成第三方日志框架
  */
 package org.apache.ibatis.logging;

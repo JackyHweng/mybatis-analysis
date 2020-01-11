@@ -27,6 +27,7 @@ import java.lang.annotation.Target;
  * @author Kazuki Shimizu
  * @see CacheNamespace
  */
+// 属性的注解
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({})
@@ -36,6 +37,7 @@ public @interface Property {
    * Returns the property name.
    *
    * @return the property name
+   * 属性名
    */
   String name();
 
@@ -43,6 +45,7 @@ public @interface Property {
    * Returns the property value or placeholder.
    *
    * @return the property value or placeholder
+   * 属性值
    */
   String value();
 }

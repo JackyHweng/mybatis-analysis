@@ -38,6 +38,7 @@ import org.apache.ibatis.mapping.StatementType;
  * </pre>
  * @author Clinton Begin
  */
+// 操作可选项
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
@@ -59,6 +60,7 @@ public @interface Options {
    * Returns whether use the 2nd cache feature if assigned the cache.
    *
    * @return {@code true} if use; {@code false} if otherwise
+   * 是否是哟缓存
    */
   boolean useCache() default true;
 
@@ -66,6 +68,7 @@ public @interface Options {
    * Returns the 2nd cache flush strategy.
    *
    * @return the 2nd cache flush strategy
+   * 缓存定时刷新策略
    */
   FlushCachePolicy flushCache() default FlushCachePolicy.DEFAULT;
 
@@ -73,6 +76,7 @@ public @interface Options {
    * Returns the result set type.
    *
    * @return the result set type
+   * 结果类型
    */
   ResultSetType resultSetType() default ResultSetType.DEFAULT;
 
@@ -80,6 +84,7 @@ public @interface Options {
    * Return the statement type.
    *
    * @return the statement type
+   * 语句类型
    */
   StatementType statementType() default StatementType.PREPARED;
 
@@ -87,12 +92,14 @@ public @interface Options {
    * Returns the fetch size.
    *
    * @return the fetch size
+   * 加载大小
    */
   int fetchSize() default -1;
 
   /**
    * Returns the statement timeout.
    * @return the statement timeout
+   * 超时时间
    */
   int timeout() default -1;
 
@@ -100,6 +107,7 @@ public @interface Options {
    * Returns whether use the generated keys feature supported by JDBC 3.0
    *
    * @return {@code true} if use; {@code false} if otherwise
+   * 是否生成主键
    */
   boolean useGeneratedKeys() default false;
 
@@ -110,6 +118,7 @@ public @interface Options {
    * </p>
    *
    * @return property names that separate with comma(',')
+   * 主键在Java中的属性
    */
   String keyProperty() default "";
 
@@ -120,6 +129,7 @@ public @interface Options {
    * </p>
    *
    * @return column names that separate with comma(',')
+   * 主键在数据库中的字段
    */
   String keyColumn() default "";
 
@@ -130,6 +140,7 @@ public @interface Options {
    * </p>
    *
    * @return result set names that separate with comma(',')
+   * 结果集
    */
   String resultSets() default "";
 }

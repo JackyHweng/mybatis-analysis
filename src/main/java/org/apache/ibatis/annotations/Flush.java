@@ -35,6 +35,7 @@ import java.lang.annotation.Target;
  * @since 3.3.0
  * @author Kazuki Shimizu
  */
+// Flush
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)

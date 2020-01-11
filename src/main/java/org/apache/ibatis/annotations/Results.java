@@ -39,6 +39,7 @@ import java.lang.annotation.Target;
  * }
  * </pre>
  * @author Clinton Begin
+ * 结果的注解
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
@@ -55,6 +56,7 @@ public @interface Results {
    * Returns mapping definitions for property.
    *
    * @return mapping definitions
+   * Result 数组
    */
   Result[] value() default {};
 }

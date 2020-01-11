@@ -51,6 +51,7 @@ import java.lang.annotation.Target;
  * </pre>
  * @author Jeff Butler
  */
+// 使用的结果集的注解
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
@@ -59,6 +60,7 @@ public @interface ResultMap {
    * Returns result map names to use.
    *
    * @return result map names
+   * 结果集
    */
   String[] value();
 }

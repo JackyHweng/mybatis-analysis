@@ -37,6 +37,7 @@ import java.lang.annotation.Target;
  * @author Clinton Begin
  * @author Kazuki Shimizu
  */
+// 指定命名空间的注解 对应 xml 的 <cache-ref>
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
@@ -46,6 +47,7 @@ public @interface CacheNamespaceRef {
    * Returns the namespace type to reference a cache (the namespace name become a FQCN of specified type).
    *
    * @return the namespace type to reference a cache
+   *
    */
   Class<?> value() default void.class;
 
@@ -54,6 +56,7 @@ public @interface CacheNamespaceRef {
    *
    * @return the namespace name
    * @since 3.4.2
+   * 指向的命名空间
    */
   String name() default "";
 }

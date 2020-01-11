@@ -33,6 +33,8 @@ public final class LogFactory {
 
   static {
     // 按顺序逐一尝试，判断使用哪个log的实现类
+    // :: 访问的是静态方法 , 而 tryImplementation 的参数为 Runable，所以这里相当于开多个线程加载日志框架
+    // 但是由于里面的都是静态方法并且加了 Sync同步锁，所以获取的是这个类的锁 也就是类锁
     tryImplementation(LogFactory::useSlf4jLogging);
     tryImplementation(LogFactory::useCommonsLogging);
     tryImplementation(LogFactory::useLog4J2Logging);
@@ -79,6 +81,7 @@ public final class LogFactory {
     }
   }
 
+  // 可以设置自定义的Log实现
   public static synchronized void useCustomLogging(Class<? extends Log> clazz) {
     setImplementation(clazz);
   }
@@ -122,7 +125,7 @@ public final class LogFactory {
     }
   }
 
-  // 设置 logConstructor
+  // 设置 logConstructor , 根据不同的实现类
   private static void setImplementation(Class<? extends Log> implClass) {
     try {
       // 获取参数为String的构造方法

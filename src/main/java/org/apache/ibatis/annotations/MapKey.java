@@ -35,6 +35,7 @@ import java.lang.annotation.Target;
  * </pre>
  * @author Clinton Begin
  */
+// Map 结果的键的注解
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
@@ -42,6 +43,7 @@ public @interface MapKey {
   /**
    * Returns the property name(or column name) for a key value of {@link java.util.Map}.
    *
+   * 键名称
    * @return the property name(or column name)
    */
   String value();

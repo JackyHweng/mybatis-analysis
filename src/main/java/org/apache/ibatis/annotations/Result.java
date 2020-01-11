@@ -31,6 +31,7 @@ import org.apache.ibatis.type.UnknownTypeHandler;
  *
  * @see Results
  * @author Clinton Begin
+ * 对字段的注解
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
@@ -41,6 +42,7 @@ public @interface Result {
    * Returns whether id column or not.
    *
    * @return {@code true} if id column; {@code false} if otherwise
+   * 是否是ID字段
    */
   boolean id() default false;
 
@@ -48,6 +50,7 @@ public @interface Result {
    * Return the column name(or column label) to map to this argument.
    *
    * @return the column name(or column label)
+   * 数据库字段
    */
   String column() default "";
 
@@ -55,6 +58,7 @@ public @interface Result {
    * Returns the property name for applying this mapping.
    *
    * @return the property name
+   * Java 类中的属性
    */
   String property() default "";
 
@@ -62,6 +66,7 @@ public @interface Result {
    * Return the java type for this argument.
    *
    * @return the java type
+   * java type
    */
   Class<?> javaType() default void.class;
 
@@ -69,6 +74,7 @@ public @interface Result {
    * Return the jdbc type for column that map to this argument.
    *
    * @return the jdbc type
+   * Jdbc Type
    */
   JdbcType jdbcType() default JdbcType.UNDEFINED;
 
@@ -76,6 +82,7 @@ public @interface Result {
    * Returns the {@link TypeHandler} type for retrieving a column value from result set.
    *
    * @return the {@link TypeHandler} type
+   * TypeHandler
    */
   Class<? extends TypeHandler> typeHandler() default UnknownTypeHandler.class;
 
@@ -83,6 +90,7 @@ public @interface Result {
    * Returns the mapping definition for single relationship.
    *
    * @return the mapping definition for single relationship
+   * One 注解
    */
   One one() default @One;
 
@@ -90,6 +98,7 @@ public @interface Result {
    * Returns the mapping definition for collection relationship.
    *
    * @return the mapping definition for collection relationship
+   * Many 的注解
    */
   Many many() default @Many;
 }

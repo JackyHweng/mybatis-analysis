@@ -43,6 +43,7 @@ import org.apache.ibatis.cache.impl.PerpetualCache;
  * @author Clinton Begin
  * @author Kazuki Shimizu
  */
+// 缓存空间配置的注解 对于xml 的 <cache/>
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
@@ -52,6 +53,7 @@ public @interface CacheNamespace {
    * Returns the cache implementation type to use.
    *
    * @return the cache implementation type
+   * 复制存储的Cache实现类
    */
   Class<? extends Cache> implementation() default PerpetualCache.class;
 
@@ -59,6 +61,7 @@ public @interface CacheNamespace {
    * Returns the cache evicting implementation type to use.
    *
    * @return the cache evicting implementation type
+   * 复制过期的Cache实现类
    */
   Class<? extends Cache> eviction() default LruCache.class;
 
@@ -66,6 +69,7 @@ public @interface CacheNamespace {
    * Returns the flush interval.
    *
    * @return the flush interval
+   * 清空缓存评率 0 代表不清除
    */
   long flushInterval() default 0;
 
@@ -73,6 +77,7 @@ public @interface CacheNamespace {
    * Return the cache size.
    *
    * @return the cache size
+   * 缓存器的大小
    */
   int size() default 1024;
 
@@ -80,6 +85,7 @@ public @interface CacheNamespace {
    * Returns whether use read/write cache.
    *
    * @return {@code true} if use read/write cache; {@code false} if otherwise
+   * 是否序列化
    */
   boolean readWrite() default true;
 
@@ -87,6 +93,7 @@ public @interface CacheNamespace {
    * Returns whether block the cache at request time or not.
    *
    * @return {@code true} if block the cache; {@code false} if otherwise
+   * 是否阻塞
    */
   boolean blocking() default false;
 
@@ -95,6 +102,7 @@ public @interface CacheNamespace {
    *
    * @return property values
    * @since 3.4.2
+   * Property 数组
    */
   Property[] properties() default {};
 

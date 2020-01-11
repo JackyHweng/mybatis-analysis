@@ -28,6 +28,7 @@ import org.apache.ibatis.mapping.FetchType;
  * @see Result
  * @see Results
  * @author Clinton Begin
+ * 复制类型的集合属性的注解
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
@@ -37,6 +38,7 @@ public @interface Many {
    * Returns the statement id that retrieves collection.
    *
    * @return the statement id
+   * 已经映射的语句 （也就是映射器的方法）全限定名
    */
   String select() default "";
 
@@ -44,6 +46,7 @@ public @interface Many {
    * Returns the fetch strategy for nested statement.
    *
    * @return the fetch strategy
+   * 加载类型
    */
   FetchType fetchType() default FetchType.DEFAULT;
 
