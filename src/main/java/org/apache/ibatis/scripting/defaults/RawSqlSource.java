@@ -34,7 +34,7 @@ import java.util.HashMap;
  * @since 3.2.0
  * @author Eduardo Macarron
  */
-// 原始的 SqlSource
+// 原始的 SqlSource ， 仅适用使用 #{} 表达式
 public class RawSqlSource implements SqlSource {
 
   //  sqlSource

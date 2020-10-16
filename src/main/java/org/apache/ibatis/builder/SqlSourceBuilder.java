@@ -31,7 +31,8 @@ import org.apache.ibatis.type.JdbcType;
 /**
  * @author Clinton Begin
  */
-// SqlSource 构建器，负责将 SQL 语句中的 #{} 替换成相应的 ? 占位符，并获取该 ? 占位符对应的 org.apache.ibatis.mapping.ParameterMapping 对象
+// SqlSource 构建器，
+// 负责将 SQL 语句中的 #{} 替换成相应的 ? 占位符，并获取该 ? 占位符对应的 org.apache.ibatis.mapping.ParameterMapping 对象
 public class SqlSourceBuilder extends BaseBuilder {
 
   private static final String PARAMETER_PROPERTIES = "javaType,jdbcType,mode,numericScale,resultMap,typeHandler,jdbcTypeName";
@@ -43,7 +44,7 @@ public class SqlSourceBuilder extends BaseBuilder {
   // 解析原始 Sql ，返回SqlSource
 
   /**
-   *
+   * 执行解析原始SQL，称为 SqlSource 对象
    * @param originalSql  原始的Sql
    * @param parameterType 参数类型
    * @param additionalParameters 附加参数集合。可能是空集合，也可能是 {@link org.apache.ibatis.scripting.xmltags.DynamicContext#bindings} 集合

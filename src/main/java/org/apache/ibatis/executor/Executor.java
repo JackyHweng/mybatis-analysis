@@ -29,7 +29,14 @@ import org.apache.ibatis.transaction.Transaction;
 
 /**
  * @author Clinton Begin
+ * 主要包活
+ * 1. 读和写操作相关方法
+ * 2. 事务相关方法
+ * 3. 缓存相关方法
+ * 4. 设置延迟加载的方法
+ * 5. 设置包装的 Executor 对象的方法
  */
+// Executor 主要负责维护 一级缓存 和 二级缓存，并提供事务管理的相关操作，他将数据库相关操作委托给 StatementHandler 完成
 public interface Executor {
 
   // 空的 ResultHandler 标志

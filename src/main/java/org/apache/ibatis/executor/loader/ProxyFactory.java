@@ -23,6 +23,7 @@ import org.apache.ibatis.session.Configuration;
 
 /**
  * @author Eduardo Macarron
+ * 代理工厂，延迟加载的功能是通过动态代理实现的
  */
 public interface ProxyFactory {
 

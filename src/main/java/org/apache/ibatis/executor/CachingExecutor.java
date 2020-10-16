@@ -42,7 +42,8 @@ public class CachingExecutor implements Executor {
 
   // 委托的 Executor 对象
   private final Executor delegate;
-  // TransactionalCacheManager 对象 用于处理不同 Session 共享二级缓存的问题
+  // TransactionalCacheManager 对象 用于处理不同 Session 共享二级缓存的问题,
+  // 那么必须做到事务提交时，才将当前事务中查询是产生的缓存，同步到二级缓存中
   private final TransactionalCacheManager tcm = new TransactionalCacheManager();
 
   public CachingExecutor(Executor delegate) {
@@ -59,12 +60,15 @@ public class CachingExecutor implements Executor {
   public void close(boolean forceRollback) {
     try {
       //issues #499, #524 and #573
+      // 如果强制回滚，则回滚
       if (forceRollback) {
         tcm.rollback();
       } else {
+        // 如果强制 commit，则回滚
         tcm.commit();
       }
     } finally {
+      // 执行 delegate 对象的方法
       delegate.close(forceRollback);
     }
   }
@@ -76,7 +80,9 @@ public class CachingExecutor implements Executor {
 
   @Override
   public int update(MappedStatement ms, Object parameterObject) throws SQLException {
+    // 如果需要清除缓存，则进行清空
     flushCacheIfRequired(ms);
+    // 执行 delegate 对象的方法
     return delegate.update(ms, parameterObject);
   }
 
@@ -86,6 +92,7 @@ public class CachingExecutor implements Executor {
     BoundSql boundSql = ms.getBoundSql(parameterObject);
     // 创建缓存Key
     CacheKey key = createCacheKey(ms, parameterObject, rowBounds, boundSql);
+    // 查询
     return query(ms, parameterObject, rowBounds, resultHandler, key, boundSql);
   }
 
@@ -130,16 +137,20 @@ public class CachingExecutor implements Executor {
 
   @Override
   public void commit(boolean required) throws SQLException {
+    // 执行 delegate 对象的方法
     delegate.commit(required);
+    // 提交 TransactionalCacheManager
     tcm.commit();
   }
 
   @Override
   public void rollback(boolean required) throws SQLException {
     try {
+      // 执行 delegate 对象的方法
       delegate.rollback(required);
     } finally {
       if (required) {
+        // 回滚
         tcm.rollback();
       }
     }

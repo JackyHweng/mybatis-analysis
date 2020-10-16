@@ -42,6 +42,8 @@ public class TransactionalCacheManager {
 
   // 获得缓存中，指定 Cache + K 的值
   public Object getObject(Cache cache, CacheKey key) {
+    // 首先获取Cache对象的TransactionCache对象
+    // 然后从 TransactionalCache 对象中，获取key对象的值
     return getTransactionalCache(cache).getObject(key);
   }
 
@@ -65,6 +67,8 @@ public class TransactionalCacheManager {
   }
 
   private TransactionalCache getTransactionalCache(Cache cache) {
+    // 从 transactionalCaches 获取Cache 对象，对应的TransactionCache 对象
+    // 如果不存在，则创建一个新的 TransactionalCache, 并加入到 transactionalCaches
     return transactionalCaches.computeIfAbsent(cache, TransactionalCache::new);
   }
 

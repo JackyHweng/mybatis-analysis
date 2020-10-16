@@ -98,10 +98,13 @@ public class TransactionalCache implements Cache {
   }
 
   public void commit() {
+    // 如果 clearOnCommit为true，则清空 delegate 缓存
     if (clearOnCommit) {
       delegate.clear();
     }
+    //  将 entriesToAddOnCommit、entriesMissedInCache 刷入 delegate 中
     flushPendingEntries();
+    // 重置
     reset();
   }
 
@@ -111,7 +114,9 @@ public class TransactionalCache implements Cache {
   }
 
   private void reset() {
+    // 重置 clearOnCommit 为 false
     clearOnCommit = false;
+    // 清空
     entriesToAddOnCommit.clear();
     entriesMissedInCache.clear();
   }

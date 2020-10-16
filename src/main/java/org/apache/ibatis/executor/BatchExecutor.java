@@ -49,6 +49,7 @@ public class BatchExecutor extends BaseExecutor {
   //每一个 BatchResult 元素，对应一个 {@link #statementList} 的 Statement 元素
   private final List<BatchResult> batchResultList = new ArrayList<>();
 
+  // 当前 SQL
   private String currentSql;
   // MappedStatement 对象
   private MappedStatement currentStatement;
@@ -107,12 +108,17 @@ public class BatchExecutor extends BaseExecutor {
       // 刷入批处理语句
       flushStatements();
       Configuration configuration = ms.getConfiguration();
+      // StatementHandler
       StatementHandler handler = configuration.newStatementHandler(wrapper, ms, parameterObject, rowBounds, resultHandler, boundSql);
+      // Connection
       Connection connection = getConnection(ms.getStatementLog());
+      // 创建 Statement 或者是 PrepareStatement 对象
       stmt = handler.prepare(connection, transaction.getTimeout());
+      // 设置 SQL 上的参数，例如 PrepareStatement 对象上的占位符
       handler.parameterize(stmt);
       return handler.query(stmt, resultHandler);
     } finally {
+      // 关闭 StatementHandler 对象
       closeStatement(stmt);
     }
   }
@@ -122,11 +128,14 @@ public class BatchExecutor extends BaseExecutor {
     // 刷入批量处理语句
     flushStatements();
     Configuration configuration = ms.getConfiguration();
+    // StatementHandler
     StatementHandler handler = configuration.newStatementHandler(wrapper, ms, parameter, rowBounds, null, boundSql);
+    // Connection
     Connection connection = getConnection(ms.getStatementLog());
     Statement stmt = handler.prepare(connection, transaction.getTimeout());
     handler.parameterize(stmt);
     Cursor<E> cursor = handler.queryCursor(stmt);
+    // 完成后关闭  Statement
     stmt.closeOnCompletion();
     return cursor;
   }

@@ -31,7 +31,7 @@ import org.apache.ibatis.session.SqlSession;
  * @author Clinton Begin
  * @author Eduardo Macarron
  */
-// 实例 InvocationHandler的代理对象
+// 实例 InvocationHandler的代理对象 , 也就是说这个是一个基于JDK 动态代理的对象
 public class MapperProxy<T> implements InvocationHandler, Serializable {
 
   private static final long serialVersionUID = -6424540398559729838L;

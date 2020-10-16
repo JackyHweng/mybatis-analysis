@@ -25,10 +25,10 @@ import org.apache.ibatis.session.SqlSession;
 /**
  * @author Lasse Voss
  */
-// MapperProxyFactory
+// MapperProxyFactory Mapper Proxy 的工厂类
 public class MapperProxyFactory<T> {
 
-  // 接口的类型
+  // Mapper 接口
   private final Class<T> mapperInterface;
   // 方法与 MapperMethod 的映射
   private final Map<Method, MapperMethod> methodCache = new ConcurrentHashMap<>();
@@ -45,6 +45,7 @@ public class MapperProxyFactory<T> {
     return methodCache;
   }
 
+  // newInstance 创建的是一个MapperProxy 对象 , 都是基于JDK Proxy 实现的
   @SuppressWarnings("unchecked")
   protected T newInstance(MapperProxy<T> mapperProxy) {
     return (T) Proxy.newProxyInstance(mapperInterface.getClassLoader(), new Class[] { mapperInterface }, mapperProxy);

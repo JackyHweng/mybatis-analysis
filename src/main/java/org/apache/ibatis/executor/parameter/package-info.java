@@ -15,5 +15,6 @@
  */
 /**
  * Base package for handling parameters.
+ * parameter 包，实现设置 PreparedStatement 的占位符参数
  */
 package org.apache.ibatis.executor.parameter;

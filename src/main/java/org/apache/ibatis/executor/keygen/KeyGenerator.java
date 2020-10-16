@@ -22,11 +22,14 @@ import org.apache.ibatis.mapping.MappedStatement;
 
 /**
  * @author Clinton Begin
+ * 主键生成接口
  */
 public interface KeyGenerator {
 
+  // sql 执行之前
   void processBefore(Executor executor, MappedStatement ms, Statement stmt, Object parameter);
 
+  // sql 执行之后
   void processAfter(Executor executor, MappedStatement ms, Statement stmt, Object parameter);
 
 }

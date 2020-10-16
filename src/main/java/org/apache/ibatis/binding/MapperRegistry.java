@@ -46,6 +46,7 @@ public class MapperRegistry {
   // 获取Mapper Proxy 对象
   @SuppressWarnings("unchecked")
   public <T> T getMapper(Class<T> type, SqlSession sqlSession) {
+    // 从 knownMappers 中 获取 MapperProxyFactory 对象
     final MapperProxyFactory<T> mapperProxyFactory = (MapperProxyFactory<T>) knownMappers.get(type);
     // 找不到，抛异常
     if (mapperProxyFactory == null) {

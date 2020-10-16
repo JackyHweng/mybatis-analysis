@@ -256,7 +256,7 @@ public class MapperMethod {
         }
       } else {
         // 获取到了 MappedStatement
-        // 设置name 和 type
+        // 设置name 和 type , name 就是 MappedStatement 的ID type就是SqlCommandType
         name = ms.getId();
         type = ms.getSqlCommandType();
         if (type == SqlCommandType.UNKNOWN) {

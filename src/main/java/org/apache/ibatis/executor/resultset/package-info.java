@@ -15,5 +15,6 @@
  */
 /**
  * Contains the result processing logic
+ * resultset 包，实现ResultSet结果集的处理，将其映射成对应的结果对象
  */
 package org.apache.ibatis.executor.resultset;

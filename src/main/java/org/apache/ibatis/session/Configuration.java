@@ -153,6 +153,7 @@ public class Configuration {
   protected final Map<String, MappedStatement> mappedStatements = new StrictMap<MappedStatement>("Mapped Statements collection")
       .conflictMessageProducer((savedValue, targetValue) ->
           ". please check " + savedValue.getResource() + " and " + targetValue.getResource());
+  // Cache 对象集合，KEY ： 命名空间,开启二级缓存，在 mybatis-config.xml 配置 <setting name="cacheEnabled" value="true"/>
   protected final Map<String, Cache> caches = new StrictMap<>("Caches collection");
   protected final Map<String, ResultMap> resultMaps = new StrictMap<>("Result Maps collection");
   protected final Map<String, ParameterMap> parameterMaps = new StrictMap<>("Parameter Maps collection");
@@ -609,6 +610,7 @@ public class Configuration {
    * @param transaction 事务对象
    * @param executorType 执行器类型
    * @return Executor
+   * <setting name="defaultExecutorType" value="" />
    */
   public Executor newExecutor(Transaction transaction, ExecutorType executorType) {
     // 获取执行器类型

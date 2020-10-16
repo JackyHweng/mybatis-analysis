@@ -16,4 +16,5 @@
 /**
  * Statement handlers.
  */
+// statement 包，实现向数据库发起SQL命令
 package org.apache.ibatis.executor.statement;

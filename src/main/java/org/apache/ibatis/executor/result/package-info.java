@@ -15,5 +15,6 @@
  */
 /**
  * Contains the result handlers.
+ * result 包，结果的处理，被ResultSet 包调用
  */
 package org.apache.ibatis.executor.result;

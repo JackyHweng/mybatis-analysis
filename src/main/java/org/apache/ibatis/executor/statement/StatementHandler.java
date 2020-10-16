@@ -28,7 +28,14 @@ import org.apache.ibatis.session.ResultHandler;
 /**
  * @author Clinton Begin
  */
-// statement 处理器
+
+/**
+ * statement 处理器
+ * 1. StatementHandler 首先通过 ParameterHandler完成Sql语句的实参绑定
+ * 2. 然后通过 java.sql.statement 对象执行Sql语句，并且获得结果集
+ * 3. 最后通过 ResultSetHandler 完成结果集的映射，得到结果对象并返回
+ *
+ */
 public interface StatementHandler {
 
   /**

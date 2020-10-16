@@ -23,10 +23,14 @@ import org.apache.ibatis.session.Configuration;
 /**
  * @author Clinton Begin
  */
+// 参数集合
 public class ParameterMap {
 
+  // 编号
   private String id;
+  // 类型
   private Class<?> type;
+  // ParameterMapping 集合
   private List<ParameterMapping> parameterMappings;
 
   private ParameterMap() {

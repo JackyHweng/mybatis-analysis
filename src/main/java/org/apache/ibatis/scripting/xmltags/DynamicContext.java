@@ -86,7 +86,7 @@ public class DynamicContext {
     return uniqueNumber++;
   }
 
-  // 静态内部类
+  // 静态内部类.上下文的参数集合
   static class ContextMap extends HashMap<String, Object> {
     private static final long serialVersionUID = 2977601501966151582L;
     // paramter 对应的 MeteObject

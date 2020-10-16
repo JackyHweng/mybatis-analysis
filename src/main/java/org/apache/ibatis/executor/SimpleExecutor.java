@@ -32,9 +32,12 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.transaction.Transaction;
 
 /**
+ * // 简单的 Executor 实现类 , 实现了 BaseExecutor 中的所有抽象方法
+ * 每次开始读或者写操作的时候，都创建对应的statement对象
+ * 执行完的时候，关闭该Statement 对象
  * @author Clinton Begin
  */
-// 简单的 Executor 实现类 , 实现了 BaseExecutor 中的所有抽象方法
+
 public class SimpleExecutor extends BaseExecutor {
 
   public SimpleExecutor(Configuration configuration, Transaction transaction) {
@@ -59,7 +62,7 @@ public class SimpleExecutor extends BaseExecutor {
     Statement stmt = null;
     try {
       Configuration configuration = ms.getConfiguration();
-      // 构建 StatementHandler
+      // 构建 StatementHandler, 每次执行操作都会创建新的 Statement
       StatementHandler handler = configuration.newStatementHandler(wrapper, ms, parameter, rowBounds, resultHandler, boundSql);
       // 初始化 StatementHandler 对象
       stmt = prepareStatement(handler, ms.getStatementLog());

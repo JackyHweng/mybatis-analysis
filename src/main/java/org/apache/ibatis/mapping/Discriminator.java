@@ -23,9 +23,21 @@ import org.apache.ibatis.session.Configuration;
 /**
  * @author Clinton Begin
  */
+// 鉴别器
+
+/**
+ * <discriminator javaType="int" column="vehicle_type">
+ *    <case value="1" resultMap="carResult"/>
+ *    <case value="2" resultMap="truckResult"/>
+ *    <case value="3" resultMap="vanResult"/>
+ *    <case value="4" resultMap="suvResult"/>
+ * </discriminator>
+ */
 public class Discriminator {
 
+  // ResultMapping 对象
   private ResultMapping resultMapping;
+  // 集合
   private Map<String, String> discriminatorMap;
 
   Discriminator() {

@@ -15,5 +15,7 @@
  */
 /**
  * Base package for languages.
+ * MyBatis 中的 scripting 模块，会根据用户传入的实参，解析映射文件中定义的动态 SQL 节点，并形成数据库可执行的 SQL 语句。
+ * 之后会处理 SQL 语句中的占位符，绑定用户传入的实参
  */
 package org.apache.ibatis.scripting;

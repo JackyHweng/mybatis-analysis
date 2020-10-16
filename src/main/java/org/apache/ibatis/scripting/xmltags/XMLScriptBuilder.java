@@ -72,8 +72,9 @@ public class XMLScriptBuilder extends BaseBuilder {
 
   // 将 sql 解析成 SqlNode 对象
   public SqlSource parseScriptNode() {
-    // 解析 Sql
+    // 1. 解析 Sql
     MixedSqlNode rootSqlNode = parseDynamicTags(context);
+    // 2. 创建 SqlSource 对象
     SqlSource sqlSource;
     // 根据 是否为动态Sql 返回 DynamicSqlSource 还是 RawSqlSource
     if (isDynamic) {
@@ -91,6 +92,7 @@ public class XMLScriptBuilder extends BaseBuilder {
     //获取 SQl所有子节点
     NodeList children = node.getNode().getChildNodes();
     for (int i = 0; i < children.getLength(); i++) {
+      // 当前子节点
       XNode child = node.newXNode(children.item(i));
       // 如果类型是 Node CDATA_SECTION_NODE 或者是 TEXT_NODE
       if (child.getNode().getNodeType() == Node.CDATA_SECTION_NODE || child.getNode().getNodeType() == Node.TEXT_NODE) {

@@ -402,7 +402,7 @@ public abstract class BaseExecutor implements Executor {
     }
   }
 
-  // 异常包装类
+  // 异常包装类, 设置包装器
   @Override
   public void setExecutorWrapper(Executor wrapper) {
     this.wrapper = wrapper;

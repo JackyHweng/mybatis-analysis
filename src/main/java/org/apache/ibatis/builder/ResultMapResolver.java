@@ -24,13 +24,21 @@ import org.apache.ibatis.mapping.ResultMapping;
 /**
  * @author Eduardo Macarron
  */
+// resultMap 解析器
 public class ResultMapResolver {
+  // 解析小助手
   private final MapperBuilderAssistant assistant;
+  // ResultMap ID
   private final String id;
+  // 类型
   private final Class<?> type;
+  // 继承哪一个 ResultMap
   private final String extend;
+  // Discriminator
   private final Discriminator discriminator;
+  // ResultMapping 集合
   private final List<ResultMapping> resultMappings;
+  // 是否自动匹配
   private final Boolean autoMapping;
 
   public ResultMapResolver(MapperBuilderAssistant assistant, String id, Class<?> type, String extend, Discriminator discriminator, List<ResultMapping> resultMappings, Boolean autoMapping) {

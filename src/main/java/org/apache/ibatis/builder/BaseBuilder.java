@@ -31,7 +31,7 @@ import org.apache.ibatis.type.TypeHandlerRegistry;
 /**
  * @author Clinton Begin
  */
-// 抽象的基础构造器
+// 抽象的基础构造器,为子类提供通用的工具类
 public abstract class BaseBuilder {
   protected final Configuration configuration;
   protected final TypeAliasRegistry typeAliasRegistry;
@@ -47,7 +47,13 @@ public abstract class BaseBuilder {
     return configuration;
   }
 
-  // 创建正则表达式
+
+  /**
+   * 创建正则表达式
+   * @param regex 正则表达式
+   * @param defaultValue 默认的值
+   * @return
+   */
   protected Pattern parseExpression(String regex, String defaultValue) {
     return Pattern.compile(regex == null ? defaultValue : regex);
   }
@@ -131,6 +137,7 @@ public abstract class BaseBuilder {
     }
   }
 
+  // 从 typeHandlerRegistry 中获得或创建对应的 TypeHandler 对象
   protected TypeHandler<?> resolveTypeHandler(Class<?> javaType, String typeHandlerAlias) {
     if (typeHandlerAlias == null) {
       return null;
@@ -145,6 +152,7 @@ public abstract class BaseBuilder {
   }
 
   // 解析 TypeHandler 类型
+  // 从 typeHandlerRegistry 中获得或创建对应的 TypeHandler 对象
   protected TypeHandler<?> resolveTypeHandler(Class<?> javaType, Class<? extends TypeHandler<?>> typeHandlerType) {
     if (typeHandlerType == null) {
       return null;
@@ -160,6 +168,7 @@ public abstract class BaseBuilder {
     return handler;
   }
 
+  // 通过别名或类全名，获得对应的类
   protected <T> Class<? extends T> resolveAlias(String alias) {
     // 这个通过获取全限定类名来获取类型
     return typeAliasRegistry.resolveAlias(alias);
